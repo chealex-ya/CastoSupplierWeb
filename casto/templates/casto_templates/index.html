@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=“utf-8”>
+        <title>Загрузка файла</title>
+<!--    </head>-->
+<!--    <body>-->
+<!--    <h1>Загрузка файла для Casto поставщиков</h1>-->
+<!--    <form action="{% url 'downloadexcel' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <button type="submit" name='mybutton' value={{excel_path}}>Загрузить результаты в excel</button>-->
+<!--    </form>-->
+<!--    </body>-->
+<!--</html>-->
+
+    </head>
+        <h1>Загрузка файла для Casto поставщиков</h1>
+        <body style="margin-top: 30px;margin-left: 30px;">
+            <form action="{% url "downloadexcel" %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file"
+                       title="Загрузка файла Excel"
+                       name="excel_file"
+                       style="border: 1px solid black; padding: 5px;"
+                       required="required">
+                <p>
+                <input type="submit"
+                       value="Загрузить"
+                       style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+            </form>
+
+            <p></p>
+            <hr>
+
+            {% for row in excel_data %}
+                {% for cell in row %}
+                    {{ cell }}&nbsp;&nbsp;
+                {% endfor %}
+                <br>
+            {% endfor %}
+        </body>
+    </html>
